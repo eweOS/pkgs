@@ -1,4 +1,4 @@
 #!/bin/execlineb -P
 
-/sbin/getty 38400 tty1
+/bin/getty 38400 tty1
 
