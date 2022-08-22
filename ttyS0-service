@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+
+/sbin/getty 38400 ttyS0 n8d
+
