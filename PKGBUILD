@@ -1,7 +1,7 @@
 # Maintainer: Yukari Chiba <i@0x7f.cc>
 
 pkgname=s6
-pkgver=2.10.0.3
+pkgver=2.11.1.2
 pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
