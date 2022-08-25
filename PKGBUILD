@@ -1,7 +1,7 @@
 # Maintainer: Yukari Chiba <i@0x7f.cc>
 
 pkgname=execline
-pkgver=2.8.0.1
+pkgver=2.9.0.1
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
