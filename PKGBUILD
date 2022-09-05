@@ -49,7 +49,7 @@ build() {
     cd ${pkgname}-${pkgver}
     ./configure \
       --prefix=/usr \
-      --bindir=/sbin \
+      --bindir=/usr/bin \
       --libexecdir=/usr/lib/s6
     make
 }
@@ -63,10 +63,11 @@ package() {
 
     # Services dir and init
     install -d s6 etc/s6/services/{available,enabled}
-    install -m 0750 "${srcdir}/s6-init" sbin/
+    install -d usr/bin
+    install -m 0750 "${srcdir}/s6-init" usr/bin/
     install -m 0750 "${srcdir}/rc.init" etc/s6/
     install -m 0750 "${srcdir}/rc.shutdown" etc/s6/
-    install -m 0750 "${srcdir}/s6-telinit" sbin/
+    install -m 0750 "${srcdir}/s6-telinit" usr/bin/
 
     # Early env vars
     install -d etc/s6/env
@@ -89,7 +90,6 @@ package() {
     chmod 0600 etc/s6/init-services/s6-svscan-log/fifo
 
     # Human readable/usable service compatibility layer
-    install -m 0754 "${srcdir}/s6-service" sbin/
-    install -d usr/bin/
+    install -m 0754 "${srcdir}/s6-service" usr/bin/
     install -m 0755 "${srcdir}/taillog" usr/bin/
 }
