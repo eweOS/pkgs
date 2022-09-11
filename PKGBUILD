@@ -8,7 +8,13 @@ pkgrel=1
 pkgdesc='Linux kernel meta package'
 arch=('any')
 license=('GPL')
+source=(linux.install)
+
+sha256sums=('SKIP')
+
 optdepends=('mkinitramfs: generate initramfs')
+
+install=linux.install
 
 package_linux() {
   depends=(linux${_kernelver})

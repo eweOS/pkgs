@@ -1,0 +1,13 @@
+#!/bin/sh
+
+post_install() {
+	cp /usr/lib/modules/$1/vmlinux /boot/vmlinux
+}
+
+pre_remove() {
+	rm /boot/vmlinux
+}
+
+post_upgrade() {
+	cp /usr/lib/modules/$1/vmlinux /boot/vmlinux
+}
