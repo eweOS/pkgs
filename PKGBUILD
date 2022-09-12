@@ -105,5 +105,11 @@ build() {
 
 package() {
     mv "$srcdir/pkgs/llvm-libs/usr" "${pkgdir}/usr"
+    install $srcdir/$_realpkgname-$pkgver.src/libunwind/include/libunwind.h \
+	${pkgdir}/usr/include/
+    install $srcdir/$_realpkgname-$pkgver.src/libunwind/include/unwind.h \
+	${pkgdir}/usr/include/
+    install $srcdir/$_realpkgname-$pkgver.src/libunwind/include/__libunwind_config.h \
+	${pkgdir}/usr/include/
     find ${pkgdir}/usr/lib -name *.a -delete || true
 }
