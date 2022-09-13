@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The line below is required in order to use the multibuild OBS features -->
+<!-- OBS-Profiles: @BUILD_FLAVOR@ -->
+
+<image schemaversion="7.5" name="eweOS-rollingrelease">
+    <description type="system">
+        <author>Yukari Chiba</author>
+        <contact>i@0x7f.cc</contact>
+        <specification>eweOS Appliance</specification>
+    </description>
+    <profiles>
+        <profile name="FilesystemImage" description="Mountable Filesystem Image of eweOS">
+        </profile>
+        <profile name="DiskImage" description="Bootable Disk Image of eweOS">
+        </profile>
+    </profiles>
+    <preferences>
+        <version>1.0.0</version>
+        <packagemanager>pacman</packagemanager>
+        <locale>POSIX</locale>
+        <keytable>us</keytable>
+        <timezone>UTC</timezone>
+        <rpm-check-signatures>false</rpm-check-signatures>
+    </preferences>
+    <preferences profiles="FilesystemImage">
+        <type image="ext4">
+            <size unit="G">1</size>
+        </type>
+    </preferences>
+    <preferences profiles="DiskImage">
+        <type image="kis" filesystem="ext4" kernelcmdline="console=ttyS0" initrd_system="none">
+            <size unit="G">3</size>
+        </type>
+    </preferences>
+    <repository components="eweOS_Meta_Rolling">
+        <source path="obs://eweOS:Meta/Rolling"/>
+    </repository>
+    <repository components="eweOS_Minimal_Rolling">
+        <source path="obs://eweOS:Minimal/Rolling"/>
+    </repository>
+    <repository components="eweOS_Kernel_Rolling">
+        <source path="obs://eweOS:Kernel/Rolling"/>
+    </repository>
+    <repository components="eweOS_Misc_Rolling">
+        <source path="obs://eweOS:Misc/Rolling"/>
+    </repository>
+    <repository components="eweOS_Misclibs_Rolling">
+        <source path="obs://eweOS:Misclibs/Rolling"/>
+    </repository>
+    <repository components="eweOS_Develop_Rolling">
+        <source path="obs://eweOS:Develop/Rolling"/>
+    </repository>
+    <repository components="eweOS_Boot_Rolling">
+        <source path="obs://eweOS:Boot/Rolling"/>
+    </repository>
+    <repository components="eweOS_Image_Tools_Rolling">
+        <source path="obs://eweOS:Image:Tools/Rolling"/>
+    </repository>
+    <packages type="image" profiles="DiskImage">
+      	<package name="clover-efi"/>
+        <package name="linux"/>
+        <package name="dinit"/>
+      	<package name="mkinitramfs"/>
+    </packages>
+    <packages type="image">
+      	<package name="base"/>
+      	<package name="linux-headers"/>
+        <package name="neofetch"/>
+        <package name="git"/>
+        <package name="vim"/>
+        <!-- Bug, must install something from every repos -->
+        <package name="mkinitramfs"/>
+    </packages>
+    <packages type="bootstrap">
+        <package name="filesystem"/>
+    </packages>
+</image>
