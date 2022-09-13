@@ -10,6 +10,8 @@
         <specification>eweOS Appliance</specification>
     </description>
     <profiles>
+        <profile name="VMImage" description="Bootable Disk Image of eweOS, with EFI support">
+        </profile>
         <profile name="FilesystemImage" description="Mountable Filesystem Image of eweOS">
         </profile>
         <profile name="DiskImage" description="Bootable Disk Image of eweOS">
@@ -33,6 +35,15 @@
             <size unit="G">3</size>
         </type>
     </preferences>
+    <preferences profiles="VMImage">
+        <type image="oem" filesystem="ext4" format="qcow2" kernelcmdline="console=ttyS0" initrd_system="none">
+	    <size unit="G">2</size>
+	    <oemconfig>
+                <oem-resize>false</oem-resize>
+	    </oemconfig>
+	    <bootloader name="grub2" console="serial"/>
+        </type>
+    </preferences>
     <repository components="eweOS_Meta_Rolling">
         <source path="obs://eweOS:Meta/Rolling"/>
     </repository>
@@ -54,14 +65,18 @@
     <repository components="eweOS_Boot_Rolling">
         <source path="obs://eweOS:Boot/Rolling"/>
     </repository>
-    <repository components="eweOS_Image_Tools_Rolling">
+    <repository components="eweOS_Image_Tools_Rolling" imageinclude="false">
         <source path="obs://eweOS:Image:Tools/Rolling"/>
     </repository>
-    <packages type="image" profiles="DiskImage">
-      	<package name="clover-efi"/>
+    <packages type="image" profiles="VMImage">
         <package name="linux"/>
         <package name="dinit"/>
-      	<package name="mkinitramfs"/>
+	<package name="mkinitramfs"/>
+	<package name="grub" />
+    </packages>
+    <packages type="image" profiles="DiskImage">
+        <package name="linux"/>
+        <package name="dinit"/>
     </packages>
     <packages type="image">
       	<package name="base"/>
@@ -69,8 +84,6 @@
         <package name="neofetch"/>
         <package name="git"/>
         <package name="vim"/>
-        <!-- Bug, must install something from every repos -->
-        <package name="mkinitramfs"/>
     </packages>
     <packages type="bootstrap">
         <package name="filesystem"/>
