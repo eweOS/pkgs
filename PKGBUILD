@@ -46,6 +46,10 @@ package() {
   install "${srcdir}/readline.h" "${pkgdir}/usr/include/readline/"
   install "${srcdir}/libhistory.so" "${pkgdir}/usr/lib/"
   install "${srcdir}/libreadline.so" "${pkgdir}/usr/lib/"
+
+  ln -s "libhistory.so" "${pkgdir}/usr/lib/libhistory.so.8"
+  ln -s "libreadline.so" "${pkgdir}/usr/lib/libreadline.so.8"
+
   ln -s "libedit.pc" "${pkgdir}/usr/lib/pkgconfig/readline.pc"
 
   install -Dm 644 "${pkgdir}"/usr/share/man/man3/editline.3 "${pkgdir}"/usr/share/man/man3/el.3
