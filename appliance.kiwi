@@ -36,7 +36,7 @@
         </type>
     </preferences>
     <preferences profiles="VMImage">
-        <type image="oem" filesystem="ext4" format="qcow2" kernelcmdline="console=ttyS0" initrd_system="none">
+        <type image="oem" filesystem="ext4" bootpartition="false" format="qcow2" kernelcmdline="console=ttyS0" initrd_system="none">
 	    <size unit="G">2</size>
 	    <oemconfig>
                 <oem-resize>false</oem-resize>
