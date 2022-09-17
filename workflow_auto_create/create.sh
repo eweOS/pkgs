@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /tmp
+
 mkdir -p ~/.config/osc/
 cat <<EOF > ~/.config/osc/oscrc
 [general]

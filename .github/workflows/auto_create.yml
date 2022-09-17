@@ -22,7 +22,10 @@ jobs:
           ref: 'main'
     
       - name: Install OSC
-        run: sudo apt install -y osc python3-m2crypto
+        run: |
+          sudo apt install -y osc
+          sudo pip install m2crypto
+
 
       - name: Start creating package
         run: ./workflow_auto_create/create.sh 
