@@ -73,6 +73,8 @@
         <package name="dinit"/>
 	<package name="mkinitramfs"/>
 	<package name="grub-efi" />
+	<package name="grub-bios" />
+	<package name="grub-common" />
     </packages>
     <packages type="image" profiles="DiskImage">
         <package name="linux"/>
