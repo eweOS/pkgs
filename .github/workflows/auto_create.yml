@@ -1,0 +1,28 @@
+name: Auto Create Packages on OBS
+
+on:
+  push:
+    types:
+      - created
+    branches-ignore:
+      - 'deprecated/**'
+      - 'template/**'
+      - 'main'
+  workflow_dispatch:
+
+env:
+  OSC_PASS: ${{ secrets.OSC_PASS }}
+
+jobs:
+  create_pkg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'main'
+    
+      - name: Install OSC
+        run: sudo apt install -y osc python3-m2crypto
+
+      - name: Start creating package
+        run: ./workflow_auto_create/create.sh 

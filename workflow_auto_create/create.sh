@@ -10,15 +10,22 @@ user=github
 pass=$OSC_PASS
 EOF
 
+# Debug
 if [ -n ${GITHUB_REF} ]; then
+	GITHUB_REF=refs/heads/OBS/test
+fi
+if [ ${GITHUB_REF} == "refs/heads/main" ]; then
 	GITHUB_REF=refs/heads/OBS/test
 fi
 
 BRANCH_NAME=${GITHUB_REF#refs/heads/}
 OBS_LOC=eweOS:${BRANCH_NAME^}
 
-osc branch eweOS:OBS/template $OBS_LOC \
-	|| { echo 'Branch failed' ; exit 1; }
+if osc branch eweOS:OBS/template $OBS_LOC \
+	| grep -q 'already exists'; then
+	echo "Creation failed, package exists."
+	exit 1
+fi
 
 osc checkout $OBS_LOC
 
