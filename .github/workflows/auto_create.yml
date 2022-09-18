@@ -1,9 +1,7 @@
 name: Auto Create Packages on OBS
 
 on:
-  push:
-    types:
-      - created
+  create:
     branches-ignore:
       - 'deprecated/**'
       - 'template/**'
@@ -12,6 +10,7 @@ on:
 
 env:
   OSC_PASS: ${{ secrets.OSC_PASS }}
+  GH_REF: ${{ GITHUB_REF }}
 
 jobs:
   create_pkg:

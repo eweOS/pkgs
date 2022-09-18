@@ -14,13 +14,13 @@ EOF
 
 # Debug
 if [ -n ${GITHUB_REF} ]; then
-	GITHUB_REF=refs/heads/OBS/test
+	GH_REF=refs/heads/OBS/test
 fi
 if [ ${GITHUB_REF} == "refs/heads/main" ]; then
-	GITHUB_REF=refs/heads/OBS/test
+	GH_REF=refs/heads/OBS/test
 fi
 
-BRANCH_NAME=${GITHUB_REF#refs/heads/}
+BRANCH_NAME=${GH_REF#refs/heads/}
 OBS_LOC=eweOS:${BRANCH_NAME^}
 
 if osc branch eweOS:OBS/template $OBS_LOC \
