@@ -12,15 +12,18 @@ user=github
 pass=$OSC_PASS
 EOF
 
-# Debug
-if [ -n ${GITHUB_REF} ]; then
-	GH_REF=refs/heads/OBS/test
-fi
-if [ ${GITHUB_REF} == "refs/heads/main" ]; then
-	GH_REF=refs/heads/OBS/test
+BRANCH_NAME=$1
+
+if [[ ${BRANCH_NAME} == deprecated* ]] ; then
+	echo "Deprecated branch, exit."
+	exit 1
 fi
 
-BRANCH_NAME=${GH_REF#refs/heads/}
+# Debug
+if [ -n ${BRANCH_NAME} ]; then
+	GH_REF=OBS/test
+fi
+
 OBS_LOC=eweOS:${BRANCH_NAME^}
 
 if osc branch eweOS:OBS/template $OBS_LOC \
