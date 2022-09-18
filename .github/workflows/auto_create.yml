@@ -1,0 +1,20 @@
+name: Auto Create Packages on OBS
+
+on: create
+
+env:
+  OSC_PASS: ${{ secrets.OSC_PASS }}
+
+jobs:
+  create_pkg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'main'
+      - name: Install OSC
+        run: |
+          sudo apt install -y osc
+          sudo pip install m2crypto
+      - name: Start creating package
+        run: ./workflow_auto_create/create.sh ${GITHUB_REF#refs/heads/}
