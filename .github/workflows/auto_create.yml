@@ -1,6 +1,7 @@
 name: Auto Create Packages on OBS
 
-on: create
+on:
+  create:
 
 env:
   OSC_PASS: ${{ secrets.OSC_PASS }}
